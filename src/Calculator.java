@@ -11,7 +11,7 @@ public class Calculator {
     Color customBlack = new Color(28,28,28); //black
     Color customOrange = new Color(255, 149, 0); //orange
 
-    String[] buttonValue = {
+    String[] buttonValues = {
             "AC", "+/-", "%", "÷",
             "7", "8", "9", "×",
             "4", "5", "6", "-",
@@ -52,6 +52,11 @@ public class Calculator {
         buttonsPanel.setBackground(customBlack);
         frame.add(buttonsPanel);
 
+        for (int i = 0; i < buttonValues.length; i++) {
+            JButton button = new JButton();
+            String buttonValue = buttonValues[i];
+            button.setFont(new Font("Arial", Font.PLAIN, 30));
+        }
 
     }
 }
