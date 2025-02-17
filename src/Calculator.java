@@ -1,19 +1,17 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 
 public class Calculator {
     int boardWidth = 360;
     int boardHeight = 540;
 
-    Color customLightGray = new Color(212, 212, 210); //white
-    Color customDarkGray = new Color(80,80,80); //grey
-    Color customBlack = new Color(28,28,28); //black
-    Color customOrange = new Color(255, 149, 0); //orange
+    Color customLightGray = new Color(212, 212, 210);
+    Color customDarkGray = new Color(80, 80, 80);
+    Color customBlack = new Color(28, 28, 28);
+    Color customOrange = new Color(255, 149, 0);
 
     String[] buttonValues = {
             "AC", "+/-", "%", "÷",
@@ -22,7 +20,6 @@ public class Calculator {
             "1", "2", "3", "+",
             "0", ".", "√", "="
     };
-
     String[] rightSymbols = {"÷", "×", "-", "+", "="};
     String[] topSymbols = {"AC", "+/-", "%"};
 
@@ -31,12 +28,13 @@ public class Calculator {
     JPanel displayPanel = new JPanel();
     JPanel buttonsPanel = new JPanel();
 
+    //A+B, A-B, A*B, A/B
     String A = "0";
     String operator = null;
     String B = null;
 
     Calculator() {
-        frame.setVisible(true);
+        // frame.setVisible(true);
         frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -49,9 +47,11 @@ public class Calculator {
         displayLabel.setHorizontalAlignment(JLabel.RIGHT);
         displayLabel.setText("0");
         displayLabel.setOpaque(true);
-        displayLabel.setLayout(new BorderLayout());
+
+        displayPanel.setLayout(new BorderLayout());
         displayPanel.add(displayLabel);
         frame.add(displayPanel, BorderLayout.NORTH);
+
         buttonsPanel.setLayout(new GridLayout(5, 4));
         buttonsPanel.setBackground(customBlack);
         frame.add(buttonsPanel);
@@ -63,24 +63,25 @@ public class Calculator {
             button.setText(buttonValue);
             button.setFocusable(false);
             button.setBorder(new LineBorder(customBlack));
-            if(Arrays.asList(topSymbols).contains(buttonValue)) {
+            if (Arrays.asList(topSymbols).contains(buttonValue)) {
                 button.setBackground(customLightGray);
                 button.setForeground(customBlack);
-
-            } else if (Arrays.asList(rightSymbols).contains(buttonValue)) {
+            }
+            else if (Arrays.asList(rightSymbols).contains(buttonValue)) {
                 button.setBackground(customOrange);
                 button.setForeground(Color.white);
-            } else {
+            }
+            else {
                 button.setBackground(customDarkGray);
                 button.setForeground(Color.white);
             }
             buttonsPanel.add(button);
 
-            button.addActionListener( new ActionListener() {
+            button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     JButton button = (JButton) e.getSource();
                     String buttonValue = button.getText();
-                    if(Arrays.asList(rightSymbols).contains(buttonValue)) {
+                    if (Arrays.asList(rightSymbols).contains(buttonValue)) {
                         if (buttonValue == "=") {
                             if (A != null) {
                                 B = displayLabel.getText();
@@ -144,6 +145,7 @@ public class Calculator {
                     }
                 }
             });
+            frame.setVisible(true);
         }
     }
 
@@ -153,10 +155,10 @@ public class Calculator {
         B = null;
     }
 
-    String removeZeroDecimal(double num) {
-        if (num % 1 == 0) {
-            return Integer.toString((int) num);
+    String removeZeroDecimal(double numDisplay) {
+        if (numDisplay % 1 == 0) {
+            return Integer.toString((int) numDisplay);
         }
-        return Double.toString(num);
+        return Double.toString(numDisplay);
     }
 }
