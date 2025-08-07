@@ -1,4 +1,4 @@
-# Java Calculator 
+### Java Calculator 
 
 A simple GUI-based calculator built using Java Swing and AWT, designed to perform basic arithmetic operations.
 
